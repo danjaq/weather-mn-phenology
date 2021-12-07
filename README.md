@@ -25,39 +25,43 @@ More detail is available in the actual `etl.ipynb` file.
 - Finally, data is written out to parquet files
 
 ## Data Dictionary
-Chosen using a star scheme to simplify querying.
+Chosen using a star scheme to simplify querying. See 'MNPheno_ERD.drawio.png'
+for ERD.
 ### observations (fact table)
-| Field Name | Data Type | Description             | Example     |
-|------------|-----------|-------------------------|-------------|
-| date       | date      | Year and month of event | 1960-07-10  |
-| species    | string    | Species observed        | ARGOPHYLLUM |
-| county     | string    | County as FIPS code     | 27053       |
-| event      | string    | Observation event       | FLOWERING   |
+| Field Name | Data Type | Description             | Example      |
+|------------|-----------|-------------------------|--------------|
+| obsv_id    | int       | Observation ID (PK)     | 4            |
+| date       | date      | Year and month of event | 1960-07-10   |
+| species    | text      | Species observed        | ARGOPHYLLUM  |
+| county_code| text      | County as FIPS code     | 27053        |
+| clim_id    | int       | Climate ID              | 1254130450601|
+| event      | text      | Observation event       | FLOWERING    |
 ### biological
 | Field Name  | Data Type | Description                             | Example         |
 |-------------|-----------|-----------------------------------------|-----------------|
-| species     | string    | Scientific species name                 | FULVA           |
-| common_name | string    | Common name of species                  | ORANGE DAY-LILY |
-| genus       | string    | Genus of species                        | HEMEROCALLIS    |
-| lifeform    | string    | Type of lifeform                        | PLANTS          |
-| group       | string    | Group of lifeform                       | FORB            |
-| mn_invasie  | string    | Indicates invasive species in Minnesota | None            |
+| species     | text      | Scientific species name                 | FULVA           |
+| common_name | text      | Common name of species                  | ORANGE DAY-LILY |
+| genus       | text      | Genus of species                        | HEMEROCALLIS    |
+| lifeform    | text      | Type of lifeform                        | PLANTS          |
+| group       | text      | Group of lifeform                       | FORB            |
+| mn_invasive | text      | Indicates invasive species in Minnesota | None            |
 ### county
 | Field Name | Data Type | Description    | Example |
 |------------|-----------|----------------|---------|
-| name       | string    | Name of county | Aitkin  |
-| FIPS       | string    | FIPS code      | 27001   |
-| state      | string    | Sate of county | MN      |
+| county     | text      | Name of county | Aitkin  |
+| county_code| text      | FIPS code      | 27001   |
+| state      | text      | Sate of county | MN      |
 ### climate
-| Field Name | Data Type | Description                                | Example |
-|------------|-----------|--------------------------------------------|---------|
-| FIPS       | string    | FIPS code for county                       | 27053   |
-| year       | integer   | Year                                       | 1982    |
-| month      | integer   | Month                                      | 1       |
-| pcpn       | double    | Total precipitation in inches              | 1.7     |
-| tmpMin     | double    | Minimum temperature in degrees Fahrenheit  | -9.6    |
-| tmpMax     | double    | Maximum temperature in degrees Fahrenheit  | 9.7     |
-| tmpAvg     | double    | Average temperature in degrees Fahrenheit  | 0.1     |
+| Field Name | Data Type | Description                                | Example      |
+|------------|-----------|--------------------------------------------|--------------|
+| clim_id    | int       | Climate ID (PK                             | 309237645512 |
+| county_code| text      | FIPS code for county                       | 27053        |
+| year       | integer   | Year                                       | 1982         |
+| month      | integer   | Month                                      | 1            |
+| pcpn       | double    | Total precipitation in inches              | 1.7          |
+| tmpMin     | double    | Minimum temperature in degrees Fahrenheit  | -9.6         |
+| tmpMax     | double    | Maximum temperature in degrees Fahrenheit  | 9.7          |
+| tmpAvg     | double    | Average temperature in degrees Fahrenheit  | 0.1          |
 ### time
 | Field Name | Data Type | Description              | Example    |
 |------------|-----------|--------------------------|------------|
@@ -66,7 +70,7 @@ Chosen using a star scheme to simplify querying.
 | week       | integer   | Week of the year         | 23         |
 | month      | integer   | Month of the year        | 6          |
 | year       | integer   | Year                     | 2005       |
-| weekday    | string    | Day of the week          | Mon        |
+| weekday    | text      | Day of the week          | Mon        |
 ## Datasets
 
 - Minnesota Phenology Network. Data accessed from the MnPN. Available:
